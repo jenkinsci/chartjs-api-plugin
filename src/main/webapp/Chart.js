@@ -168,7 +168,7 @@
 			tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>",
 
 			// String - Template string for single tooltips
-			multiTooltipTemplate: "<%= value %>",
+			multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>",
 
 			// String - Colour behind the legend colour block
 			multiTooltipKeyBackground: '#fff',
@@ -409,8 +409,13 @@
 				maxSteps = Math.floor(drawingSize/(textSize * 1.5)),
 				skipFitting = (minSteps >= maxSteps);
 
-			var maxValue = max(valuesArray),
-				minValue = min(valuesArray);
+			// Filter out null values since these would min() to zero
+			var values = [];
+			each(valuesArray, function( v ){
+				v == null || values.push( v );
+			});
+			var minValue = min(values),
+			    maxValue = max(values);
 
 			// We need some degree of separation here to calculate the scales if all the values are the same
 			// Adding/minusing 0.5 will give us a range of 1.
@@ -834,13 +839,13 @@
 			var container = domNode.parentNode,
 			    padding = parseInt(getStyle(container, 'padding-left')) + parseInt(getStyle(container, 'padding-right'));
 			// TODO = check cross browser stuff with this.
-			return container.clientWidth - padding;
+			return container ? container.clientWidth - padding : 0;
 		},
 		getMaximumHeight = helpers.getMaximumHeight = function(domNode){
 			var container = domNode.parentNode,
 			    padding = parseInt(getStyle(container, 'padding-bottom')) + parseInt(getStyle(container, 'padding-top'));
 			// TODO = check cross browser stuff with this.
-			return container.clientHeight - padding;
+			return container ? container.clientHeight - padding : 0;
 		},
 		getStyle = helpers.getStyle = function (el, property) {
 			return el.currentStyle ?
@@ -2228,7 +2233,7 @@
 
 
 	if (amd) {
-		define(function(){
+		define('Chart', [], function(){
 			return Chart;
 		});
 	} else if (typeof module === 'object' && module.exports) {
