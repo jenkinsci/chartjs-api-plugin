@@ -29,4 +29,31 @@ import hudson.model.PageDecorator;
 @Extension
 public class Chartjs extends PageDecorator {
 
+    public static String getShortName(String buildName) {
+        if (buildName.length() < 40) {
+            return buildName;
+        } else {
+            //needs buildName.length() < 60
+            //buildNameShortened = buildName.substring(0, 15) + "..."+buildName.substring(buildName.length()/2-7, buildName.length()/2+7)+"..." + buildName.substring(buildName.length() - 15, buildName.length());
+            //may make unclear what build it actually is
+            String bns = "";
+            int nonDigits = 0;
+            for (int x = 0; x < buildName.length(); x++) {
+                if (!Character.isDigit(buildName.charAt(x))) {
+                    nonDigits++;
+                    if (nonDigits % 2 == 0) {
+                        //add every second nondigit
+                        bns = bns + buildName.charAt(x);
+                    }
+                } else {
+                    //add all digits
+                    bns = bns + buildName.charAt(x);
+                    //reset counter, so next char will be not included
+                    nonDigits = 0;
+                }
+            }
+            return bns;
+        }
+    }
+
 }
