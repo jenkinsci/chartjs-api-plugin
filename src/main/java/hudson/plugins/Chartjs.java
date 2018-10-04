@@ -30,9 +30,8 @@ import hudson.model.PageDecorator;
 public class Chartjs extends PageDecorator {
 
     public static String getShortName(String buildName, int buildNumber) {
-        String buildNameWithBuildNumber = buildName + Integer.toString(buildNumber);
-        if (buildNameWithBuildNumber.length() < 40) {
-            return buildNameWithBuildNumber;
+        if (buildName.length() < 38) {
+            return buildName + ":" +Integer.toString(buildNumber);
         } else {
 //            System.out.println(buildName.length());
 //            System.out.println(removeEveryNonDigitNoLetter(buildName).length());
@@ -44,7 +43,7 @@ public class Chartjs extends PageDecorator {
 //            System.out.println(removeNonVowels(buildName));
 //            System.out.println(removeEverySecondNonDigit(buildName));
 //            System.out.println(removeParts(buildName));
-            return removeEverySecondNonDigit(buildNameWithBuildNumber);
+            return removeEverySecondNonDigit(buildName) + ":" +Integer.toString(buildNumber);
         }
     }
 
