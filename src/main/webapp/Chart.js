@@ -2807,6 +2807,14 @@
 
 	};
 
+        //being backwards compatible
+        function getSpecialColor(dataset, index) {
+            if (dataset.coloredTips && typeof dataset.coloredTips[index] !== 'undefined' && dataset.coloredTips[index] !== null) {
+                return dataset.coloredTips[index];
+            } else {
+                return dataset.pointColor;
+            }
+        }
 
 	Chart.Type.extend({
 		name: "Line",
@@ -2864,7 +2872,7 @@
 						label : data.labels[index],
 						datasetLabel: dataset.label,
 						strokeColor : dataset.pointStrokeColor,
-						fillColor : dataset.pointColor,
+						fillColor : getSpecialColor(dataset, index),
 						highlightFill : dataset.pointHighlightFill || dataset.pointColor,
 						highlightStroke : dataset.pointHighlightStroke || dataset.pointStrokeColor
 					}));
