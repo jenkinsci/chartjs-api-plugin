@@ -2809,8 +2809,12 @@
 
         //being backwards compatible
         function getSpecialColor(dataset, index) {
-            if (dataset.coloredTips && typeof dataset.coloredTips[index] !== 'undefined' && dataset.coloredTips[index] !== null) {
-                return dataset.coloredTips[index];
+            if (dataset.coloredTips) {
+                if (dataset.coloredTips[index]) {
+                    return dataset.coloredTips[index];
+                } else {
+                    return dataset.pointColor;
+                }
             } else {
                 return dataset.pointColor;
             }
