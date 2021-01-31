@@ -48,44 +48,44 @@ public class Chartjs extends PageDecorator {
     }
 
     public static String removeEverySecondNonDigit(String buildName) {
-        String bns = "";
+        StringBuilder bns = new StringBuilder("");
         int nonDigits = 0;
         for (int x = 0; x < buildName.length(); x++) {
             if (!Character.isDigit(buildName.charAt(x))) {
                 nonDigits++;
                 if (nonDigits % 2 == 0) {
                     //add every second nondigit
-                    bns = bns + buildName.charAt(x);
+                    bns.append(buildName.charAt(x));
                 }
             } else {
                 //add all digits
-                bns = bns + buildName.charAt(x);
+                bns.append(buildName.charAt(x));
                 //reset counter, so next char will be not included
                 nonDigits = 0;
             }
         }
-        return bns;
+        return bns.toString();
     }
 
     public static String removeNonVowels(String buildName) {
-        String bns = "";
+        StringBuilder bns = new StringBuilder("");
         for (int x = 0; x < buildName.length(); x++) {
             if ("aeiou".contains("" + buildName.charAt(x)) || Character.isDigit(buildName.charAt(x))) {
-                bns = bns + buildName.charAt(x);
+                bns.append(buildName.charAt(x));
             }
         }
-        return bns;
+        return bns.toString();
 
     }
 
     public static String removeEveryNonDigitNoLetter(String buildName) {
-        String bns = "";
+        StringBuilder bns = new StringBuilder("");
         for (int x = 0; x < buildName.length(); x++) {
             if (Character.isLetterOrDigit(buildName.charAt(x))) {
-                bns = bns + buildName.charAt(x);
+                bns.append(buildName.charAt(x));
             }
         }
-        return bns;
+        return bns.toString();
     }
 
     private static String removeParts(String buildName) {
