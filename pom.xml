@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>4.12</version>
+        <version>4.52</version>
     </parent>
     <groupId>io.jenkins.plugins</groupId>
     <artifactId>chartjs</artifactId>
@@ -13,7 +13,7 @@
     <name>Jenkins Chart.js plugin</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jenkins.version>2.235.1</jenkins.version>
+        <jenkins.version>2.361.4</jenkins.version>
         <java.level>8</java.level>
     </properties>
 
@@ -23,12 +23,23 @@
             <email>judovana@gmail.com</email>
         </developer>
     </developers>
+
     <licenses>
         <license>
             <name>MIT</name>
             <url>http://www.opensource.org/licenses/mit-license.php</url>
         </license>
     </licenses>
+
+
+    <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
+    <scm>
+        <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
+        <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <build>
         <plugins>
             <plugin>
