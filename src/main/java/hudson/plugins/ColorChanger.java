@@ -32,6 +32,8 @@ import java.util.Random;
  */
 public class ColorChanger {
 
+    private static final Random random = new Random();
+
     static String codeHex(Color c) {
         String hex = "#";
         hex += codeColorComponent(c.getRed());
@@ -60,10 +62,9 @@ public class ColorChanger {
     }
 
     public static String randomColor() {
-        Random r = new Random();
-        int red = r.nextInt(256);
-        int green = r.nextInt(256);
-        int blue = r.nextInt(256);
+        int red = random.nextInt(256);
+        int green = random.nextInt(256);
+        int blue = random.nextInt(256);
         return codeHex(new Color(red, green, blue));
     }
 
