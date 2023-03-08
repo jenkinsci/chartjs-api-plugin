@@ -8,6 +8,6 @@ See examples in known plugin consumers for:
  * [jenkins-report-jck](https://github.com/judovana/jenkins-report-jtreg#project-details)
  * [jenkins-report-rpms](https://github.com/judovana/jenkins-report-diff#project)
 
-How to embed:
+# How to embed
  tbd
 
