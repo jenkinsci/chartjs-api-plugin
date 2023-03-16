@@ -9,11 +9,11 @@
     <groupId>io.jenkins.plugins</groupId>
     <artifactId>chartjs-api</artifactId>
     <!-- versioning of chartjs plugin is following the chartjs versioning-->
-    <version>1.0.2.1</version>
+    <version>2.9.3.1</version>
     <packaging>hpi</packaging>
     <name>Chart.js API</name>
     <properties>
-        <chartjs.version>1.0.2</chartjs.version>
+        <chartjs.version>2.9.3</chartjs.version>
         <jenkins.version>2.361.4</jenkins.version>
         <!-- those twoo should be aligned -->
         <bom.version>2.361.x</bom.version> <!-- Pick up common dependencies for the selected LTS line: https://github.com/jenkinsci/bom#usage -->
@@ -82,7 +82,7 @@
         </execution>
        </executions>
        <configuration>
-        <url>https://github.com/chartjs/Chart.js/archive/refs/tags/v${chartjs.version}.tar.gz</url>
+        <url>https://github.com/chartjs/Chart.js/releases/download/v${chartjs.version}/Chart.js.zip</url>
         <unpack>true</unpack>
         <outputDirectory>${project.build.directory}/chartjs-${chartjs.version}</outputDirectory>
        </configuration>
@@ -101,7 +101,7 @@
             <outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
             <resources>
               <resource>
-                <directory>${project.build.directory}/chartjs-${chartjs.version}/Chart.js-${chartjs.version}</directory>
+                <directory>${project.build.directory}/chartjs-${chartjs.version}</directory>
                   <includes>
                     <include>Chart.js</include>
                   </includes>
