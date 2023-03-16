@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package hudson.plugins;
+package io.jenkins.plugins.chartjs;
 
 import hudson.Extension;
 import hudson.model.PageDecorator;

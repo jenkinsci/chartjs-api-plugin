@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package hudson.plugins;
+package io.jenkins.plugins.chartjs;
 
 import java.awt.Color;
 import java.util.Random;
