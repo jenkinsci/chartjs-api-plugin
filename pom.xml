@@ -8,10 +8,12 @@
     </parent>
     <groupId>io.jenkins.plugins</groupId>
     <artifactId>chartjs-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <!-- versioning of chartjs plugin is following the chartjs versioning-->
+    <version>1.0.2.1-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <name>Chart.js API</name>
     <properties>
+        <chartjs.version>1.0.2</chartjs.version>
         <jenkins.version>2.361.4</jenkins.version>
         <!-- those twoo should be aligned -->
         <bom.version>2.361.x</bom.version> <!-- Pick up common dependencies for the selected LTS line: https://github.com/jenkinsci/bom#usage -->
@@ -64,4 +66,51 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+<build>
+  <plugins>
+    <plugin>
+      <groupId>com.googlecode.maven-download-plugin</groupId>
+      <artifactId>download-maven-plugin</artifactId>
+      <version>1.6.8</version>
+      <executions>
+        <execution>
+         <id>install-chartjs</id>
+         <phase>generate-sources</phase>
+         <goals>
+          <goal>wget</goal>
+         </goals>
+        </execution>
+       </executions>
+       <configuration>
+        <url>https://github.com/chartjs/Chart.js/archive/refs/tags/v${chartjs.version}.tar.gz</url>
+        <unpack>true</unpack>
+        <outputDirectory>${project.build.directory}/chartjs-${chartjs.version}</outputDirectory>
+       </configuration>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-resources-plugin</artifactId>
+      <executions>
+        <execution>
+          <id>copy-resources</id>
+          <phase>generate-sources</phase>
+          <goals>
+            <goal>copy-resources</goal>
+          </goals>
+          <configuration>
+            <outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
+            <resources>
+              <resource>
+                <directory>${project.build.directory}/chartjs-${chartjs.version}/Chart.js-${chartjs.version}</directory>
+                  <includes>
+                    <include>Chart.js</include>
+                  </includes>
+              </resource>
+            </resources>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
 </project>
