@@ -1,0 +1,16 @@
+{
+  "name": "chart.js-api",
+  "version": "1.0.0",
+  "description": "Chart.js API Jenkins Plugin",
+  "dependencies": {
+    "chart.js": "4.2.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jenkinsci/chartjs-api-plugin.git"
+  },
+  "author": "judovana",
+  "license": "MIT",
+  "homepage": "https://github.com/jenkinsci/chartjs-api-plugin#readme"
+}
