@@ -9,11 +9,11 @@
     <groupId>io.jenkins.plugins</groupId>
     <artifactId>chartjs-api</artifactId>
     <!-- versioning of chartjs plugin is following the chartjs versioning-->
-    <version>3.9.1.1</version>
+    <version>4.2.1.1</version>
     <packaging>hpi</packaging>
     <name>Chart.js API</name>
     <properties>
-        <chartjs.version>3.9.1</chartjs.version>
+        <chartjs.version>4.2.1</chartjs.version>
         <jenkins.version>2.361.4</jenkins.version>
         <!-- those twoo should be aligned -->
         <bom.version>2.361.x</bom.version> <!-- Pick up common dependencies for the selected LTS line: https://github.com/jenkinsci/bom#usage -->
