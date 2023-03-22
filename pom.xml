@@ -111,7 +111,7 @@
               <resource>
                   <directory>${project.basedir}/node_modules/chart.js/dist</directory>
                   <includes>
-                    <include>chart.js</include>
+                    <include>chart.umd.js</include>
                   </includes>
               </resource>
             </resources>
