@@ -9,5 +9,5 @@ See examples in known plugin consumers for:
  * [jenkins-report-rpms](https://github.com/judovana/jenkins-report-diff#project)
 
 # How to embed
- tbd
+ This api is simply adding the chart.js library  to the view and/or project page see  [header](src/main/resources/io/jenkins/plugins/chartjs/Chartjs/header.jelly). Them, eg. in your `column.jelly` or `floatingBox.jelly` you can use powers of chart.js firectly. See appropriate files in above projects. See https://www.chartjs.org/docs/latest/ and you should be ok to script it all.
 
