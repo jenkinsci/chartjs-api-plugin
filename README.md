@@ -1,21 +1,10 @@
-# chartjs-api plugin
-
-This plugin itself as it is, does nothing. It is jsut provider for awesome [chart.js](https://www.chartjs.org/docs/latest/) library.
-It allows you to easily use js-rendered charts to the **job** page or to the **view** page.
-
-See examples in known plugin consumers for:
- * [report-generic-chart-column-plugin](https://github.com/jenkinsci/report-generic-chart-column-plugin#project-summary)
- * [report-diff-plugin](https://github.com/jenkinsci/report-diff-plugin/#project)
- * [jenkins-report-jck](https://github.com/judovana/jenkins-report-jtreg#project-details)
-
-# How to embed
- This api is simply adding the chart.js library  to the view and/or project page see [header](src/main/resources/io/jenkins/plugins/chartjs/Chartjs/header.jelly). You have to first require it in your pom:
- ```
-         <dependency>
-            <groupId>io.jenkins.plugins</groupId>
-            <artifactId>chartjs-api</artifactId>
-            <version>${chartjs.version}</version>
-        </dependency>
-```
-And then, eg. in your `column.jelly` or `floatingBox.jelly` you can use powers of chart.js directly. See appropriate files in above projects for examples. See https://www.chartjs.org/docs/latest/ and you should be ok to script it in wihtout issues.
-
+# chartjs-api plugin V 1
+## issue
+ * Chart.js is not working whe protoype.js is loaded - https://github.com/chartjs/Chart.js/issues/11201
+ * Jenkins is using prototype.js, but is going to remove it - https://issues.jenkins.io/browse/JENKINS-70906
+## temporary workaround
+ * While those issues are valid, this branch will be serving chart.js 1 library, to make depndent plugins usable.
+ * This branch must be removed once one of those issues is resolved
+ * the branch must not diverge from master in anythng else except chart.js 1 code
+ * nothing from this branch can go to master
+ * except chart.js 1 code, all changes must go from master only
