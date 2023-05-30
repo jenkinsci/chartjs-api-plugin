@@ -1,4 +1,4 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core">
-    <script type="text/javascript" src="${resURL}/plugin/chartjs-api/chart.umd.js"></script>
+    <script type="text/javascript" src="${resURL}/plugin/chartjs-api/Chart.js"></script>
 </j:jelly>

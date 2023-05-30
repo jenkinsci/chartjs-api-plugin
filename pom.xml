@@ -13,10 +13,10 @@
     <packaging>hpi</packaging>
     <name>Chart.js API</name>
     <properties>
-        <revision>4.2.1.6</revision>
+        <revision>1.0.2.6</revision>
         <changelist>-SNAPSHOT</changelist>
         <gitHubRepo>jenkinsci/chartjs-api-plugin</gitHubRepo>
-        <chartjs.version>4.2.1</chartjs.version>
+        <chartjs.version>1.0.2</chartjs.version>
         <jenkins.version>2.361.4</jenkins.version>
         <!-- those twoo should be aligned -->
         <bom.version>2.361.x</bom.version> <!-- Pick up common dependencies for the selected LTS line: https://github.com/jenkinsci/bom#usage -->
@@ -69,60 +69,51 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-<build>
-  <plugins>
-    <plugin>
-      <groupId>com.github.eirslett</groupId>
-      <artifactId>frontend-maven-plugin</artifactId>
-      <version>1.12.1</version>
-      <executions>
-        <execution>
-          <id>install node and npm</id>
-          <goals>
-            <goal>install-node-and-npm</goal>
-          </goals>
-          <phase>generate-resources</phase>
-          <configuration>
-            <nodeVersion>v18.15.0</nodeVersion>
-          </configuration>
-        </execution>
-        <execution>
-          <id>npm install</id>
-          <goals>
-            <goal>npm</goal>
-          </goals>
-          <phase>generate-resources</phase>
-          <configuration>
-            <arguments>install</arguments>
-          </configuration>
-        </execution>
-      </executions>
-    </plugin>
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-resources-plugin</artifactId>
-      <executions>
-        <execution>
-          <id>copy-resources</id>
-          <phase>generate-resources</phase>
-          <goals>
-            <goal>copy-resources</goal>
-          </goals>
-          <configuration>
-            <outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
-            <resources>
-              <resource>
-                  <directory>${project.basedir}/node_modules/chart.js/dist</directory>
-                  <includes>
-                    <include>chart.umd.js</include>
-                    <include>chart.umd.js.map</include>
-                  </includes>
-              </resource>
-            </resources>
-          </configuration>
-        </execution>
-      </executions>
-    </plugin>
-  </plugins>
-</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <executions>
+                    <execution>
+                        <id>install-chartjs</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <url>https://github.com/chartjs/Chart.js/archive/refs/tags/v${chartjs.version}.tar.gz</url>
+                    <unpack>true</unpack>
+                    <outputDirectory>${project.build.directory}/chartjs-${chartjs.version}</outputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/chartjs-${chartjs.version}/Chart.js-${chartjs.version}</directory>
+                                    <includes>
+                                        <include>Chart.js</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
