@@ -31,7 +31,7 @@ public class Chartjs extends PageDecorator {
 
     public static String getShortName(String buildName, int buildNumber) {
         if (buildName.length() < 38) {
-            return buildName + ":" +Integer.toString(buildNumber);
+            return buildName + ":" + buildNumber;
         } else {
 //            System.out.println(buildName.length());
 //            System.out.println(removeEveryNonDigitNoLetter(buildName).length());
@@ -43,18 +43,18 @@ public class Chartjs extends PageDecorator {
 //            System.out.println(removeNonVowels(buildName));
 //            System.out.println(removeEverySecondNonDigit(buildName));
 //            System.out.println(removeParts(buildName));
-            return removeEverySecondNonDigit(buildName) + ":" +Integer.toString(buildNumber);
+            return removeEverySecondNonDigit(buildName) + ":" + buildNumber;
         }
     }
 
     public static String removeEverySecondNonDigit(String buildName) {
-        StringBuilder bns = new StringBuilder("");
+        StringBuilder bns = new StringBuilder();
         int nonDigits = 0;
         for (int x = 0; x < buildName.length(); x++) {
             if (!Character.isDigit(buildName.charAt(x))) {
                 nonDigits++;
                 if (nonDigits % 2 == 0) {
-                    //add every second nondigit
+                    //add every second non-digit
                     bns.append(buildName.charAt(x));
                 }
             } else {
@@ -68,7 +68,7 @@ public class Chartjs extends PageDecorator {
     }
 
     public static String removeNonVowels(String buildName) {
-        StringBuilder bns = new StringBuilder("");
+        StringBuilder bns = new StringBuilder();
         for (int x = 0; x < buildName.length(); x++) {
             if ("aeiou".contains("" + buildName.charAt(x)) || Character.isDigit(buildName.charAt(x))) {
                 bns.append(buildName.charAt(x));
@@ -79,19 +79,13 @@ public class Chartjs extends PageDecorator {
     }
 
     public static String removeEveryNonDigitNoLetter(String buildName) {
-        StringBuilder bns = new StringBuilder("");
+        StringBuilder bns = new StringBuilder();
         for (int x = 0; x < buildName.length(); x++) {
             if (Character.isLetterOrDigit(buildName.charAt(x))) {
                 bns.append(buildName.charAt(x));
             }
         }
         return bns.toString();
-    }
-
-    private static String removeParts(String buildName) {
-        String ss = buildName.substring(0, 12) + ".." + buildName.substring(buildName.length() / 2 - 6, buildName.length() / 2 + 6) + ".." + buildName.substring(buildName.length() - 12, buildName.length());
-        //may make unclear what build it actually is
-        return ss;
     }
 
 }

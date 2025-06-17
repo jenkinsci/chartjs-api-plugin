@@ -34,6 +34,10 @@ public class ColorChanger {
 
     private static final Random random = new Random();
 
+    private ColorChanger() {
+        // hidden ctor.
+    }
+
     static String codeHex(Color c) {
         String hex = "#";
         hex += codeColorComponent(c.getRed());
@@ -62,10 +66,7 @@ public class ColorChanger {
     }
 
     public static String randomColor() {
-        int red = random.nextInt(256);
-        int green = random.nextInt(256);
-        int blue = random.nextInt(256);
-        return codeHex(new Color(red, green, blue));
+        return randomColor(random);
     }
 
     public static String randomColor(Random r) {
