@@ -25,31 +25,32 @@ package io.jenkins.plugins.chartjs;
 
 import java.awt.Color;
 import java.util.Random;
-import static junit.framework.TestCase.assertEquals;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  *
  * @author edda
  */
-public class ColorChangerTest {
+class ColorChangerTest {
 
     @Test
-    public void codeHex() {
+    void codeHex() {
         assertEquals("#000000", ColorChanger.codeHex(new Color(0, 0, 0)));
         assertEquals("#ffffff", ColorChanger.codeHex(new Color(255, 255, 255)));
         assertEquals("#ff0101", ColorChanger.codeHex(new Color(255, 1, 1)));
     }
 
     @Test
-    public void shiftColorComponent() {
+    void shiftColorComponent() {
         assertEquals(0, ColorChanger.shiftColorComponent(255, 1));
         assertEquals(30, ColorChanger.shiftColorComponent(30, 256));
         assertEquals(255, ColorChanger.shiftColorComponent(0, -1));
     }
 
     @Test
-    public void randomColor() {
+    void randomColor() {
         assertEquals("#bbd43d", ColorChanger.randomColor(new Random(0)));
     }
 }
