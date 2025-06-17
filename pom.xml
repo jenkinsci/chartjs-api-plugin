@@ -1,128 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.jenkins-ci.plugins</groupId>
-        <artifactId>plugin</artifactId>
-        <version>4.55</version>
-    </parent>
-    <groupId>io.jenkins.plugins</groupId>
-    <artifactId>chartjs-api</artifactId>
-    <!-- versioning of chartjs plugin is following the chartjs versioning-->
-    <version>${revision}${changelist}</version>
-    <packaging>hpi</packaging>
-    <name>Chart.js API</name>
-    <properties>
-        <revision>4.2.1.6</revision>
-        <changelist>-SNAPSHOT</changelist>
-        <gitHubRepo>jenkinsci/chartjs-api-plugin</gitHubRepo>
-        <chartjs.version>4.2.1</chartjs.version>
-        <!-- https://www.jenkins.io/doc/developer/plugin-development/choosing-jenkins-baseline/ -->
-        <jenkins.baseline>2.361</jenkins.baseline>
-        <jenkins.version>${jenkins.baseline}.4</jenkins.version>
-    </properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jenkins-ci.plugins</groupId>
+    <artifactId>plugin</artifactId>
+    <version>5.17</version>
+  </parent>
+  <groupId>io.jenkins.plugins</groupId>
+  <artifactId>chartjs-api</artifactId>
+  <!-- versioning of chartjs plugin is following the chartjs versioning -->
+  <version>${revision}${changelist}</version>
+  <packaging>hpi</packaging>
+  <name>Chart.js API</name>
+  <properties>
+    <revision>4.2.1.6</revision>
+    <changelist>-SNAPSHOT</changelist>
+    <gitHubRepo>jenkinsci/chartjs-api-plugin</gitHubRepo>
+    <chartjs.version>4.2.1</chartjs.version>
+    <node.version>22.16.0</node.version>
+    <npm.version>10.9.2</npm.version>
+    <!-- https://www.jenkins.io/doc/developer/plugin-development/choosing-jenkins-baseline/ -->
+    <jenkins.baseline>2.479</jenkins.baseline>
+    <jenkins.version>${jenkins.baseline}.3</jenkins.version>
+  </properties>
 
-    <developers>
-        <developer>
-            <id>judovana</id>
-            <email>judovana@gmail.com</email>
-        </developer>
-    </developers>
+  <developers>
+    <developer>
+      <id>judovana</id>
+      <email>judovana@gmail.com</email>
+    </developer>
+  </developers>
 
-    <licenses>
-        <license>
-            <name>MIT</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
-        </license>
-    </licenses>
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://www.opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
 
+  <url>https://github.com/${gitHubRepo}</url>
+  <scm>
+    <connection>scm:git:https://github.com/${gitHubRepo}.git</connection>
+    <developerConnection>scm:git:git@github.com:${gitHubRepo}.git</developerConnection>
+    <url>https://github.com/${gitHubRepo}</url>
+    <tag>${scmTag}</tag>
+  </scm>
 
-    <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
-    <scm>
-        <connection>scm:git:https://github.com/${gitHubRepo}.git</connection>
-        <developerConnection>scm:git:git@github.com:${gitHubRepo}.git</developerConnection>
-        <url>https://github.com/${gitHubRepo}</url>
-        <tag>${scmTag}</tag>
-    </scm>
+  <repositories>
+    <repository>
+      <id>repo.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/public/</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>repo.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
 
-    <repositories>
-        <repository>
-            <id>repo.jenkins-ci.org</id>
-            <url>https://repo.jenkins-ci.org/public/</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>repo.jenkins-ci.org</id>
-            <url>https://repo.jenkins-ci.org/public/</url>
-        </pluginRepository>
-    </pluginRepositories>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.jenkins.tools.bom</groupId>
-                <artifactId>bom-${jenkins.baseline}.x</artifactId>
-                <!-- Pick up common dependencies for the selected LTS line: https://github.com/jenkinsci/bom#usage -->
-                <version>1887.vda_d0ddb_c15c4</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-<build>
-  <plugins>
-    <plugin>
-      <groupId>com.github.eirslett</groupId>
-      <artifactId>frontend-maven-plugin</artifactId>
-      <version>1.12.1</version>
-      <executions>
-        <execution>
-          <id>install node and npm</id>
-          <goals>
-            <goal>install-node-and-npm</goal>
-          </goals>
-          <phase>generate-resources</phase>
-          <configuration>
-            <nodeVersion>v18.15.0</nodeVersion>
-          </configuration>
-        </execution>
-        <execution>
-          <id>npm install</id>
-          <goals>
-            <goal>npm</goal>
-          </goals>
-          <phase>generate-resources</phase>
-          <configuration>
-            <arguments>install</arguments>
-          </configuration>
-        </execution>
-      </executions>
-    </plugin>
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-resources-plugin</artifactId>
-      <executions>
-        <execution>
-          <id>copy-resources</id>
-          <phase>generate-resources</phase>
-          <goals>
-            <goal>copy-resources</goal>
-          </goals>
-          <configuration>
-            <outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
-            <resources>
-              <resource>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
+              <resources>
+                <resource>
                   <directory>${project.basedir}/node_modules/chart.js/dist</directory>
                   <includes>
                     <include>chart.umd.js</include>
                     <include>chart.umd.js.map</include>
                   </includes>
-              </resource>
-            </resources>
-          </configuration>
-        </execution>
-      </executions>
-    </plugin>
-  </plugins>
-</build>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

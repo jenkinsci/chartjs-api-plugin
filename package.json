@@ -2,6 +2,10 @@
   "name": "chart.js-api",
   "version": "1.0.0",
   "description": "Chart.js API Jenkins Plugin",
+  "scripts": {
+    "mvnbuild": "",
+    "mvntest": ""
+  },
   "dependencies": {
     "chart.js": "4.2.1"
   },

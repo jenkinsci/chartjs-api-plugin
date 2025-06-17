@@ -1,6 +1,6 @@
 <?jelly escape-by-default='true'?>
 <div>
-    This plugin do nothing by its own, but serves as provider of awesome ChartJS library, which can then be reused in other plugins, eg:
+    This plugin does nothing by its own, but serves as provider of awesome ChartJS library, which can then be reused in other plugins, eg:
     <ul>
      <li>report-generic-chart-column</li>
      <li>report-diff</li>
